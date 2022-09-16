@@ -15,11 +15,35 @@
   position: sticky;
   top: 0;
   z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  flex-shrink: 2;
 }
 
+
 .app_header_image{
+  flex: 0.8;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.app_header_image>img{
   padding: 0.7rem .2rem .2rem 0.9rem;
-  height: 2.4rem;
+  max-height: 2.4rem;
+}
+
+.tools{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logout{
+  flex: 0.2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .container{
@@ -38,9 +62,9 @@
   padding: 1rem;
 }
 
-
-
-
+.w100{
+  width: 100%;
+}
 
 
 

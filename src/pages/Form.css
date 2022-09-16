@@ -1,4 +1,4 @@
-.Authentication_header{
+.form_container{
     background-color: #fafafa;
     height: 100vh;
     display: flex;
@@ -8,7 +8,7 @@
 
 }
 
-.credential_box{
+.inner_form_box{
     width: 400px;
     background-color: white;
     min-height: 40%;
@@ -42,7 +42,7 @@ input{
     outline-color: gray;
 }
 
-button{
+.btn{
     padding: .5rem;
     width: 84%; 
     border-radius: 5px;
@@ -50,5 +50,20 @@ button{
     background-color: #0095f6;
     color: white;
     font-weight: 200;
-    margin-top: 1rem ;
+    margin-left: auto;
+    margin-top: 0.8rem;
+    margin-right: auto;
+}
+
+.center{
+    width: 100%;
+    text-align: center;
+}
+
+.screen-center{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

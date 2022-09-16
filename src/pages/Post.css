@@ -16,6 +16,12 @@
     display: flex;
     align-items: center;
     padding: .6rem .2rem;
+    justify-content: space-between;
+}
+
+.display_flex_center{
+    display: flex;
+    align-items: center;
 }
 
 .post_avatar{
@@ -25,4 +31,12 @@
 .post_text{
     font-weight: normal ;
     padding: .6rem;
+}
+
+.delete{
+    color:gray; 
+}
+
+.delete:hover{
+    color:red;
 }

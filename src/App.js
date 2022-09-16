@@ -1,17 +1,21 @@
 import './App.css';
-import Login from "./components/Login";
-import SignUp from './components/SignUp';
-import Main from './components/Main';
+import Login from "./pages/Login";
+import SignUp from './pages/SignUp';
+import Home from './pages/Home';
 import {Routes,Route} from "react-router-dom";
+import { useContext } from 'react';
+import { AuthContext } from './context/AuthContext';
 
 function App() {
+  const {currentUser}=useContext(AuthContext);
+  console.log(currentUser);
 
   return (
     <div className="App">
       <Routes>
-        <Route path='/' element={<Main/>}/>
-        <Route path='/login' element={<Login/>}/>
-        <Route path='/signup' element={<SignUp/>}/>
+        <Route path='/' element={currentUser?<Home/>:<Login/>}/>
+        <Route path='/login' element={currentUser?<Home/>:<Login/>}/>
+        <Route path='/signup' element={currentUser?<Home/>:<SignUp/>}/>
       </Routes>
       </div>
   );

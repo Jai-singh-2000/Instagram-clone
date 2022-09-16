@@ -1,10 +1,11 @@
-import "./Login.css";
+import "./Form.css";
 import React, { useState } from 'react';
 import {Link, useNavigate} from "react-router-dom";
+import {auth} from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import {auth, storage} from "../firebase";
-import { async } from "@firebase/util";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage"; 
+import { updateProfile } from "firebase/auth";
+import {db} from "../firebase";
+import {doc, getDoc,setDoc } from "firebase/firestore";
 
 const SignUp = () => {
   const [err,setError]=useState("")
@@ -12,25 +13,56 @@ const SignUp = () => {
 
   const handleSubmitSignUp=async(e)=>{
     e.preventDefault()
-    let email=e.target[0].value;
-    let name=e.target[1].value;
+    let username=e.target[0].value;
+    let email=e.target[1].value;
     let password=e.target[2].value;
+
+
+    // Check for username already exists
+    const docRef = doc(db, "usernames", username);
+    try {
+      const docSnap = await getDoc(docRef);
+      if(docSnap.exists()) {
+          alert("Username already exist ! Please choose another username");
+          return;
+      }
+
+    } catch(error) {
+        console.log(error)
+    }
+
 
     try{
 
       let userCredential= await createUserWithEmailAndPassword(auth, email, password)
       const user = userCredential.user;
+
+      setDoc(doc(db, "usernames",username), {
+        username:username,
+        email:email
+      });
+
+      try{
+        await updateProfile(user, {
+          displayName: username
+        })
+        console.log("Display name updated");
+      }catch(err)
+      {
+        console.log("Error in display name updation",err.message);
+      }
+
       e.target[0].value=""
       e.target[1].value=""
       e.target[2].value=""
-      navigate("/")
+      navigate("/");//Success
 
     }catch(error)
     {
       setError(error.message);
       setTimeout(()=>{
         setError("");
-      },1000)
+      },2000)
     }
 
   
@@ -38,9 +70,9 @@ const SignUp = () => {
   }
   
   return (
-    <div className="Authentication_header">
+    <div className="form_container">
 
-    <div className="credential_box">
+    <div className="inner_form_box">
 
       <div>
         <center>
@@ -50,10 +82,10 @@ const SignUp = () => {
 
       <form onSubmit={handleSubmitSignUp}>
         <center>
-          <input type="text" placeholder='Email'/>
-          <input type="text" placeholder='Username'/>
+          <input type="text" placeholder='username'/>
+          <input type="email" placeholder='Email'/>
           <input type="password" placeholder='Password' />
-          <button>Sign Up</button>
+          <button className="btn">Sign Up</button>
           </center>
         </form>
     </div>
