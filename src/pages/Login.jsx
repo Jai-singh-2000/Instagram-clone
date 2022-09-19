@@ -1,14 +1,9 @@
-import "./Form.css";
-import React from 'react';
-import {Link, useNavigate} from "react-router-dom";
 import {auth} from "../firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useContext } from "react";
-import { AuthContext } from "../context/AuthContext";
+import {Link, useNavigate} from "react-router-dom";
 
 const Login = () => {
 
-  const {currentUser}=useContext(AuthContext);
   const navigate=useNavigate();
 
   const logInUser=(e)=>{
@@ -18,8 +13,7 @@ const Login = () => {
 
       signInWithEmailAndPassword(auth,email,password)
       .then(()=>{navigate("/");})
-      .catch((err)=>{console.log(err);})
-
+      .catch((err)=>{alert(err.message);})
   }
 
   return (
@@ -29,7 +23,7 @@ const Login = () => {
 
         <div>
           <center>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/800px-Instagram_logo.svg.png?20160616034027" height={70} alt="" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Instagram_logo.svg/800px-Instagram_logo.svg.png?20160616034027" height={70} alt="Instaram" />
           </center>
         </div>
 
@@ -52,4 +46,4 @@ const Login = () => {
   )
 }
 
-export default Login
+export default Login;

@@ -1,22 +1,14 @@
+import secret  from "./secret";
 import { initializeApp } from "firebase/app";
 import {getAuth} from "firebase/auth";
 import {getFirestore} from "firebase/firestore";
 import {getStorage} from "firebase/storage";
 
-const firebaseConfig = {
-    apiKey: "AIzaSyCXetmwSTOCbw0noFsfIunoHmzkUO6x_7c",
-    authDomain: "instagram-clone-react-9e934.firebaseapp.com",
-    projectId: "instagram-clone-react-9e934",
-    storageBucket: "instagram-clone-react-9e934.appspot.com",
-    messagingSenderId: "855616091739",
-    appId: "1:855616091739:web:7a32e08958c32012c4317e",
-    measurementId: "G-59L1KZ0T5J"
-  };
-
-const firebaseApp = initializeApp(firebaseConfig);
+// secret is firebaseConfig
+const firebaseApp = initializeApp(secret);
 
 const auth=getAuth(firebaseApp); 
 const storage=getStorage(firebaseApp);//storage
 const db=getFirestore(firebaseApp);//firestore
 
- export {auth,db,storage}; 
+export {auth,db,storage}; 

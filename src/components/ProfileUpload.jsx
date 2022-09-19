@@ -1,13 +1,10 @@
+import { AuthContext } from '../context/AuthContext';
 import { useState, useContext } from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
+import { Avatar,Box,Button,Modal } from '@mui/material';
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import {doc,updateDoc} from "firebase/firestore";
-import {db, storage} from "../firebase";
-import { AuthContext } from '../context/AuthContext';
-import { Avatar } from '@mui/material';
 import { updateProfile } from 'firebase/auth';
+import {db, storage} from "../firebase";
 
 const style = {
   position: 'absolute',
@@ -42,7 +39,7 @@ export default function ProfileUpload() {
 
     uploadTask.on("state_changed",null,
         (error)=>{
-        alert("Error on uploadTask.on",error.message);
+        alert("Error on profile upload ",error.message);
         handleClose();
         setLoading(false);
         },
@@ -59,7 +56,7 @@ export default function ProfileUpload() {
                   profilePic:url
                 });
 
-                console.log("Profile pic updated");
+                // console.log("Profile pic updated");
             }catch(err)
             {
                 console.log("Error in profile pic upload",err.message);
@@ -88,9 +85,8 @@ export default function ProfileUpload() {
         <Box sx={style}>
           {
             loading?<div>
-            
             <h1 className='screen-center'>Loading ....</h1>
-            
+
             </div>:<div>
 
             <h2 className='center'>Upload Profile</h2>

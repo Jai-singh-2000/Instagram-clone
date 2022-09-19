@@ -1,5 +1,4 @@
-import "./Form.css";
-import React, { useState } from 'react';
+import {useState} from 'react';
 import {Link, useNavigate} from "react-router-dom";
 import {auth} from "../firebase";
 import { createUserWithEmailAndPassword } from "firebase/auth";
@@ -16,7 +15,6 @@ const SignUp = () => {
     let username=e.target[0].value;
     let email=e.target[1].value;
     let password=e.target[2].value;
-
 
     // Check for username already exists
     const docRef = doc(db, "usernames", username);
@@ -55,7 +53,7 @@ const SignUp = () => {
       e.target[0].value=""
       e.target[1].value=""
       e.target[2].value=""
-      navigate("/");//Success
+      navigate("/"); //Success
 
     }catch(error)
     {

@@ -1,12 +1,10 @@
 import { useState, useContext } from 'react';
 import { AuthContext } from '../context/AuthContext';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Modal from '@mui/material/Modal';
-import PostAddIcon from '@mui/icons-material/PostAdd';
 import { getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import {doc,setDoc,serverTimestamp} from "firebase/firestore";
 import {db, storage} from "../firebase";
+import PostAddIcon from '@mui/icons-material/PostAdd';
+import {Box,Button,Modal} from '@mui/material';
 
 const style = {
   position: 'absolute',
@@ -39,7 +37,7 @@ export default function BasicModal() {
     const uploadTask=uploadBytesResumable(storageRef,image);
 
     uploadTask.on("state_changed",null, (error)=>{
-      alert(error.message);
+      alert("Error on post upload",error.message);
       handleClose();
       setLoading(false);
     },
@@ -52,7 +50,9 @@ export default function BasicModal() {
           timestamp:serverTimestamp(),
           imageUrl:url,
           caption:caption,
-          username: currentUser.displayName
+          username: currentUser.displayName,
+          like:[],
+          comments:{}
         });
 
         console.log(serverTimestamp())
