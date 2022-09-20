@@ -23,18 +23,18 @@ export default function BasicModal() {
   const {currentUser,uid}=useContext(AuthContext);
   const [open, setOpen] = useState(false);
   const [caption,setCaption]= useState("")
-  const [image,setImage]=useState(null);
+  const [video,setVideo]=useState(null);
   const [loading,setLoading]=useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
   const handleUploadPost=async(e)=>{
     e.preventDefault();
-    if(caption===""||image===null)return;
+    if(caption===""||video===null)return;
     
     setLoading(true);
-    const storageRef = ref(storage, `reels/${image.name}`)
-    const uploadTask=uploadBytesResumable(storageRef,image);
+    const storageRef = ref(storage, `reels/${video.name}`)
+    const uploadTask=uploadBytesResumable(storageRef,video);
 
     uploadTask.on("state_changed",null, (error)=>{
       alert(error.message);
@@ -55,7 +55,7 @@ export default function BasicModal() {
         });
 
         setCaption("");
-        setImage(null);
+        setVideo(null);
         handleClose();
         setLoading(false);
       })
@@ -81,7 +81,7 @@ export default function BasicModal() {
           <h2 className='center'>Upload new reel</h2>
           <form>
             <input  className='w100' type="text" placeholder='Caption' onChange={(e)=>setCaption(e.target.value)}/>
-            <input className='w100' type="file" onChange={(e)=>setImage(e.target.files[0])}/>
+            <input className='w100' type="file" onChange={(e)=>setVideo(e.target.files[0])}/>
             <button className='btn w100' onClick={handleUploadPost}>Upload</button>
           </form>
           

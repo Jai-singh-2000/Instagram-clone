@@ -7,7 +7,7 @@ import { doc,getDoc,updateDoc,deleteDoc } from "firebase/firestore";
 import {db} from "../firebase";
 
 const Reel = ({caption,username,videoUrl,currentUserName,id,like}) => {
-  const [playing,setPlaying]=useState(false);
+  const [playing,setPlaying]=useState(true);
   const [profilePic,setProfilePic]=useState(null);
   const [postLike,setPostLike]=useState(false);
   const reelRef=useRef(null); 
